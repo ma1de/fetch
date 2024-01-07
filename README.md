@@ -8,9 +8,9 @@ A copy of neofetch but made in Rust and functions only on Linux (afaik).
 <img src="https://github.com/ma1de/fetch/blob/main/assets/manpage.png" alt="manpage">
 
 # Requirements
-Linux (any distro) <br>
-Cargo <br>
-Make <br>
+[Linux](https://en.wikipedia.org/wiki/Linux) (any distro) <br>
+[Cargo](https://rustup.rs/) <br>
+[Make](https://www.gnu.org/software/make/)
 
 # Setup
 ```
