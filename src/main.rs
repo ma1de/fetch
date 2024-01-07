@@ -9,8 +9,8 @@ fn get_kernel_name() -> Option<String> {
     let result = Command::new("uname")
         .arg("-s").arg("-r").arg("-m").arg("-o").output();
 
-    if let Err(_err) = result {
-        return None 
+    if let Err(err) = result {
+        panic!("Caught an exception: {}", err);
     }
 
     return Some(String::from_utf8_lossy(&result.unwrap().stdout).to_string().replace("\n", ""))
@@ -20,8 +20,8 @@ fn get_distribution_name() -> Option<String> {
     let result = Command::new("cat")
         .arg("/etc/os-release").output();
 
-    if let Err(_err) = result {
-        return None
+    if let Err(err) = result {
+        panic!("Caught an exception: {}", err);
     }
 
     let binding = String::from_utf8_lossy(&result.unwrap().stdout).to_string();
