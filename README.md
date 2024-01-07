@@ -17,4 +17,4 @@ $ make
 Now you can add fetch to the bottom of your .bashrc or .whatevershellrc <br> or just execute `fetch` in the terminal.
 
 # Contribute
-It's a personal project, you *can't* contribute. 
+It's a personal project, you *can't* contribute ...unless you wanna fix my ridiculous code then make a pull request :-) 
