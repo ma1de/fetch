@@ -18,9 +18,9 @@ fn get_kernel_name() -> Option<String> {
     let result = Command::new("uname")
         .arg("-s").arg("-r").arg("-m").arg("-o").output();
 
-    // Handling any potential errors by panicking
-    if let Err(err) = result {
-        panic!("Caught an exception: {}", err);
+    // Handling any potential errors by returning an empty string
+    if let Err(_) = result {
+        return Some(String::new())
     }
 
     return Some(String::from_utf8_lossy(&result.unwrap().stdout).to_string().replace("\n", ""))
@@ -37,9 +37,9 @@ fn get_distribution_name() -> Option<String> {
     let result = Command::new("cat")
         .arg("/etc/os-release").output();
 
-    // Handing any potential errors by panicking
-    if let Err(err) = result {
-        panic!("Caught an exception: {}", err);
+    // Handing any potential errors by returning an empty string
+    if let Err(_) = result {
+        return Some(String::new())
     }
 
     // Creating a binding because Rust drops this value afterwards
@@ -78,9 +78,9 @@ fn get_distribution_name() -> Option<String> {
 fn get_shell() -> Option<String> {
     let shell_name = get_shell_name();
 
-    // Handling any potential errors by panicking
-    if let Err(err) = shell_name {
-        panic!("Caught an exception {}", err);
+    // Handling any potential errors by returning an empty string
+    if let Err(_) = shell_name {
+        return Some(String::new())
     }
 
     return Some(shell_name.unwrap())
@@ -131,10 +131,18 @@ fn main() {
     println!("{}: {}%", "RAM Usage".red().bold(), get_ram_usage(sys) as u64); // here we convert it
                                                                               // to u64 because we
                                                                               // don't want any
-                                                                              // remainders.
-    println!("{}: {}", "Distro".red().bold(), distro);
-    println!("{}: {}", "Shell".red().bold(), shell);
-    println!("{}: {}\n", "Kernel".red().bold(), kernel);
+                                                                              // remainders. 
+    if distro != String::new() {
+        println!("{}: {}", "Distro".red().bold(), distro);
+    }
+
+    if shell != String::new() {
+        println!("{}: {}", "Shell".red().bold(), shell);
+    }
+
+    if kernel != String::new() {
+        println!("{}: {}\n", "Kernel".red().bold(), kernel);
+    }
     // [PRINTS END]
 }
 
