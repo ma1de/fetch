@@ -9,9 +9,9 @@ Cargo <br>
 ```
 $ cargo test
 $ cargo build
-$ cd target/dev
+$ cd target/debug
 $ mv fetch /usr/bin 
 ```
 
 # Contribute
-Why lol
+It's a personal project, you *can't* contribute. 
