@@ -1,2 +1,2 @@
 # fetch
-copy of neofetch but for me lol
+Fetch - a copy of neofetch but made in Rust and functions only in Linux.

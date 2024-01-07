@@ -42,7 +42,7 @@ fn get_distribution_name() -> Option<String> {
         panic!("Caught an exception: {}", err);
     }
 
-    // Creating a binding because Rust drops this value after
+    // Creating a binding because Rust drops this value afterwards
     let binding = String::from_utf8_lossy(&result.unwrap().stdout).to_string();
     let output = binding.split("\n");
 
@@ -137,3 +137,40 @@ fn main() {
     println!("{}: {}\n", "Kernel".red().bold(), kernel);
     // [PRINTS END]
 }
+
+// [TESTS BEGIN HERE]
+#[cfg(test)]
+mod tests {
+    use std::process::Command;
+    use get_shell::get_shell_name;
+
+    #[test]
+    fn check_kernel_name() {
+        let result = Command::new("uname")
+            .arg("-s").arg("-r").arg("-m").arg("-o").output();
+
+        if let Err(err) = result {
+            panic!("Command doesn't execute: {}", err)
+        } 
+    }
+
+    #[test]
+    fn check_distribution_name() {
+        let result = Command::new("cat")
+            .arg("/etc/os-release").output();
+
+        if let Err(err) = result {
+            panic!("Command doesn't execute: {}", err);
+        }
+    }
+
+    #[test]
+    fn check_shell_name() {
+        let shell_name = get_shell_name();
+
+        if let Err(err) = shell_name {
+            panic!("Unable to get the shell: {}", err);
+        }
+    }
+}
+// [TESTS END HERE]
