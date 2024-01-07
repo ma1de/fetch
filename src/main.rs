@@ -41,7 +41,13 @@ fn get_distribution_name() -> Option<String> {
 }
 
 fn get_shell() -> Option<String> {
-    return Some(get_shell_name().unwrap())
+    let shell_name = get_shell_name();
+
+    if let Err(err) = shell_name {
+        panic!("Caught an exception {}", err);
+    }
+
+    return Some(shell_name.unwrap())
 }
 
 fn get_ram_usage(sys: System) -> f32 {
