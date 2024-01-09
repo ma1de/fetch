@@ -1,11 +1,10 @@
 # fetch
-A copy of neofetch but made in Rust and functions only on Linux (afaik).
+A copy of neofetch but made in Rust and functions only on Linux.
 
 > [!IMPORTANT]
-> This may contain bugs (I have no idea)
+> This may contain bugs.
 
 <img src="https://github.com/ma1de/fetch/blob/main/assets/example.png" alt="fetch">
-<img src="https://github.com/ma1de/fetch/blob/main/assets/manpage.png" alt="manpage">
 
 # Requirements
 [Linux](https://en.wikipedia.org/wiki/Linux) (any distro) <br>
@@ -14,8 +13,8 @@ A copy of neofetch but made in Rust and functions only on Linux (afaik).
 
 # Setup
 ```
-$ sudo apt-get install make
-$ make
+$ sudo apt-get install make (use your package manager)
+$ sudo make
 ``` 
 Now you can add fetch to the bottom of your .bashrc or .whatevershellrc <br> or just execute `fetch` in the terminal.
 
