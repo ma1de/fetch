@@ -17,7 +17,7 @@ use std::process::Command;
 fn get_kernel_name() -> Option<String> {
     let result = Command::new("uname")
         .arg("-s").arg("-r").arg("-m").arg("-o").output();
-
+    
     // Handling any potential errors by returning an empty string
     if let Err(_) = result {
         return Some(String::new())
@@ -115,10 +115,10 @@ fn main() {
     // [VARIABLES END]
 
     // [PRINTS BEGIN]
-    println!("\n{}: {}", "CPU".red().bold(), sys.cpus()[0].brand());
-    println!("{}: {}", "Cores".red().bold(), sys.cpus().len());
-    println!("{}: {}%", "CPU Usage".red().bold(), sys.global_cpu_info().cpu_usage().round());
-    println!("{}: {} MB", "RAM".red().bold(), sys.total_memory() / 1e+6 as u64); // because
+    println!("\n[] {}: {}", "CPU".red().bold(), sys.cpus()[0].brand());
+    println!("[󰻟] {}: {}", "Cores".red().bold(), sys.cpus().len());
+    println!("[󱨂] {}: {}%", "CPU Usage".red().bold(), sys.global_cpu_info().cpu_usage().round());
+    println!("[󰘚] {}: {} MB", "RAM".red().bold(), sys.total_memory() / 1e+6 as u64); // because
                                                                                  // `sys.total_memory()`
                                                                                  // returns value
                                                                                  // in bytes, we
@@ -128,20 +128,20 @@ fn main() {
                                                                                  // 1e+6 and
                                                                                  // converting it
                                                                                  // to u64.
-    println!("{}: {}%", "RAM Usage".red().bold(), get_ram_usage(sys) as u64); // here we convert it
+    println!("[󱨂] {}: {}%", "RAM Usage".red().bold(), get_ram_usage(sys) as u64); // here we convert it
                                                                               // to u64 because we
                                                                               // don't want any
                                                                               // remainders. 
     if distro != String::new() {
-        println!("{}: {}", "Distro".red().bold(), distro);
+        println!("[] {}: {}", "Distro".red().bold(), distro);
     }
 
     if shell != String::new() {
-        println!("{}: {}", "Shell".red().bold(), shell);
+        println!("[] {}: {}", "Shell".red().bold(), shell);
     }
 
     if kernel != String::new() {
-        println!("{}: {}\n", "Kernel".red().bold(), kernel);
+        println!("[] {}: {}\n", "Kernel".red().bold(), kernel);
     }
     // [PRINTS END]
 }
