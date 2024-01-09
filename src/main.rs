@@ -34,16 +34,14 @@ fn get_kernel_name() -> Option<String> {
 // @return std::option::Option<std::string::String>
 // =================================================
 fn get_uptime() -> Option<String> {
-    let sys = get_sys_info::System::new();
+    let result = Command::new("uptime")
+        .arg("-p").output();
 
-    return match sys.uptime() {
-        Ok(uptime) => {
-            let time: DateTime<chrono::offset::Local> = DateTime::from(SystemTime::UNIX_EPOCH + uptime);
-
-            Some(time.format("%M minutes").to_string())
-        },
-        Err(_) => Some(String::new())
+    if let Err(_) = result {
+        return Some(String::new())
     }
+
+    return Some(String::from_utf8_lossy(&result.unwrap().stdout).to_string().replace("up ", "").replace("\n", ""))
 }
 
 // =================================================
@@ -216,16 +214,7 @@ mod tests {
     #[test]
     fn check_uptime() {
         let result = Command::new("uptime")
-            .arg("|")
-            .arg("awk")
-            .arg("'{")
-            .arg("print")
-            .arg("$3")
-            .arg("\"")
-            .arg("\"")
-            .arg("$4")
-            .arg("}'")
-            .output();
+            .arg("-p").output();
 
         if let Err(err) = result {
             panic!("Unable to get uptime: {}", err);
