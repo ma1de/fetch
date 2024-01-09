@@ -135,12 +135,12 @@ fn main() {
 
     // [PRINTS BEGIN]
 
-    println!("{}", r"     ______ _____ _____ _____  _   _ ".bold().red().italic());
-    println!("{}", r"    |  ___|  ___|_   _/  __ \| | | |".bold().red().italic());
-    println!("{}", r"   | |_  | |__   | | | /  \/| |_| |".bold().red().italic());
-    println!("{}", r"  |  _| |  __|  | | | |    |  _  |".bold().red().italic());
-    println!("{}", r" | |   | |___  | | | \__/\| | | |".bold().red().italic());
-    println!("{}", r"\_|   \____/  \_/  \____/\_| |_/".bold().red().italic());
+    println!("{}", r"______ _____ _____ _____  _   _ ".bold().red());
+    println!("{}", r"|  ___|  ___|_   _/  __ \| | | |".bold().red());
+    println!("{}", r"| |_  | |__   | | | /  \/| |_| |".bold().red());
+    println!("{}", r"|  _| |  __|  | | | |    |  _  |".bold().red());
+    println!("{}", r"| |   | |___  | | | \__/\| | | |".bold().red());
+    println!("{}", r"\_|   \____/  \_/  \____/\_| |_/".bold().red());
     println!("\n[] {}: {} ({} Cores)", "CPU".red().bold(), sys.cpus()[0].brand(), sys.cpus().len());
     println!("[󱨂] {}: {}%", "CPU Usage".red().bold(), sys.global_cpu_info().cpu_usage().round());
     println!("[󰘚] {}: {} MB", "RAM".red().bold(), sys.total_memory() / 1e+6 as u64); // because
