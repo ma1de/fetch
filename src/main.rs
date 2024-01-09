@@ -4,7 +4,8 @@ extern crate colored;
 use colored::*;
 use get_shell::*;
 use sysinfo::{System, RefreshKind};
-use std::process::Command;
+use get_sys_info::{Platform, DateTime};
+use std::{process::Command, time::SystemTime};
 // ========  IMPORTS END HERE  ========
 
 // =================================================
@@ -24,6 +25,25 @@ fn get_kernel_name() -> Option<String> {
     }
 
     return Some(String::from_utf8_lossy(&result.unwrap().stdout).to_string().replace("\n", ""))
+}
+
+// =================================================
+// Getting the uptime from the `get_sys_info` crate
+// and turning it into a `%M minutes` format.
+//
+// @return std::option::Option<std::string::String>
+// =================================================
+fn get_uptime() -> Option<String> {
+    let sys = get_sys_info::System::new();
+
+    return match sys.uptime() {
+        Ok(uptime) => {
+            let time: DateTime<chrono::offset::Local> = DateTime::from(SystemTime::UNIX_EPOCH + uptime);
+
+            Some(time.format("%M minutes").to_string())
+        },
+        Err(_) => Some(String::new())
+    }
 }
 
 // =================================================
@@ -112,6 +132,7 @@ fn main() {
     let kernel = get_kernel_name().unwrap();
     let distro = get_distribution_name().unwrap();
     let shell = get_shell().unwrap();
+    let uptime = get_uptime().unwrap();
     // [VARIABLES END]
 
     // [PRINTS BEGIN]
@@ -130,7 +151,12 @@ fn main() {
     println!("[󱨂] {}: {}%", "RAM Usage".red().bold(), get_ram_usage(sys) as u64); // here we convert it
                                                                               // to u64 because we
                                                                               // don't want any
-                                                                              // remainders. 
+                                                                              // remainders.
+    
+    if uptime != String::new() {
+        println!("[] {}: {}", "Uptime".red().bold(), uptime);
+    }
+                                                    
     if distro != String::new() {
         println!("[] {}: {}", "Distro".red().bold(), distro);
     }
@@ -177,6 +203,25 @@ mod tests {
 
         if let Err(err) = shell_name {
             panic!("Unable to get the shell: {}", err);
+        }
+    }
+
+    #[test]
+    fn check_uptime() {
+        let result = Command::new("uptime")
+            .arg("|")
+            .arg("awk")
+            .arg("'{")
+            .arg("print")
+            .arg("$3")
+            .arg("\"")
+            .arg("\"")
+            .arg("$4")
+            .arg("}'")
+            .output();
+
+        if let Err(err) = result {
+            panic!("Unable to get uptime: {}", err);
         }
     }
 }
