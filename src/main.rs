@@ -115,8 +115,7 @@ fn main() {
     // [VARIABLES END]
 
     // [PRINTS BEGIN]
-    println!("\n[] {}: {}", "CPU".red().bold(), sys.cpus()[0].brand());
-    println!("[󰻟] {}: {}", "Cores".red().bold(), sys.cpus().len());
+    println!("\n[] {}: {} ({} Cores)", "CPU".red().bold(), sys.cpus()[0].brand(), sys.cpus().len());
     println!("[󱨂] {}: {}%", "CPU Usage".red().bold(), sys.global_cpu_info().cpu_usage().round());
     println!("[󰘚] {}: {} MB", "RAM".red().bold(), sys.total_memory() / 1e+6 as u64); // because
                                                                                  // `sys.total_memory()`
