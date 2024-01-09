@@ -1,6 +1,8 @@
 all:
-	@echo "(1/2) Building the program"
+	@echo "(1/3) Building the program"
 	@cargo build --release
-	@echo "(2/2) Running tests"
+	@echo "(2/3) Running tests"
 	@cargo test
+	@echo "(3/3) Copying fetch to /usr/bin"
+	@cp target/release/fetch /usr/bin/
 	@echo "Done!"
