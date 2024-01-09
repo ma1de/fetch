@@ -9,7 +9,7 @@ A copy of neofetch but made in Rust and functions only on Linux. (it was tested 
 # Requirements
 [Linux](https://en.wikipedia.org/wiki/Linux) (any distro) <br>
 [Cargo](https://rustup.rs/) <br>
-[Make](https://www.gnu.org/software/make/)
+[Make](https://www.gnu.org/software/make/) <br>
 [A Nerd Font (any nerd font)](https://github.com/ryanoasis/nerd-fonts)
 
 # Setup
