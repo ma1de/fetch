@@ -1,5 +1,5 @@
 # fetch
-A copy of neofetch but made in Rust and functions only on Linux.
+A copy of neofetch but made in Rust and functions only on Linux. (it was tested only on Linux so I'm unsure if it works on anything else, but Linux)
 
 > [!IMPORTANT]
 > This may contain bugs.
