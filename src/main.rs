@@ -4,8 +4,7 @@ extern crate colored;
 use colored::*;
 use get_shell::*;
 use sysinfo::{System, RefreshKind};
-use get_sys_info::{Platform, DateTime};
-use std::{process::Command, time::SystemTime};
+use std::process::Command;
 // ========  IMPORTS END HERE  ========
 
 // =================================================
